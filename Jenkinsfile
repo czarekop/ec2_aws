@@ -13,7 +13,7 @@ pipeline {
         stage('checkout') {
             steps {
                  script{
-                        dir("terraform")
+                        dir("ec2_aws")
                         {
                             git "https://github.com/czarekop/ec2_aws.git"
                         }
