@@ -26,9 +26,9 @@ pipeline {
 
         stage('Plan') {
             steps {
-                sh 'pwd;cd TERRAFORM_HOME ; terraform init'
-                sh "pwd;cd TERRAFORM_HOME ; terraform plan -out tfplan"
-                sh 'pwd;cd TERRAFORM_HOME ; terraform show -no-color tfplan > tfplan.txt'
+                sh "terraform init ${env.WORKSPACE}/ec2_aws"
+                sh "terraform plan -out tfplan ${env.WORKSPACE}/ec2_aws"
+                sh "terraform show -no-color tfplan > ${env.WORKSPACE}/ec2_aws/tfplan.txt"
             }
         }
         stage('Approval') {
