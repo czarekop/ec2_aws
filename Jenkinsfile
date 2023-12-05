@@ -4,7 +4,7 @@ pipeline {
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
     } 
     environment {
-        TERRAFORM_HOME = tool name: 'terraform-11', type: 'org.jenkinsci.plugins.terraform.TerraformInstallation'
+        TERRAFORM_HOME = tool name: 'terraform', type: 'org.jenkinsci.plugins.terraform.TerraformInstallation'
         PATH = "${TERRAFORM_HOME}/bin:${env.PATH}"
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
