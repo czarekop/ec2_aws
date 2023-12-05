@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'ec2_instance_name', defaultValue: '', description: 'wprowadz nazwe maszyny ec2')
+        string(name: 'ec2_Instance_Name', defaultValue: '', description: 'wprowadz nazwe maszyny ec2')
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'od razu po planie wykonaj terraform apply?')
     }
 
@@ -33,7 +33,7 @@ pipeline {
                     dir("${env.WORKSPACE}/ec2_aws") {
                         sh """
                             terraform init
-                            terraform plan -out tfplan -var 'ec2_instance_name=${params.ec2InstanceName}'
+                            terraform plan -out tfplan -var 'ec2_Instance_Name=${params.ec2_Instance_Name}'
                             terraform show -no-color tfplan > tfplan.txt
                         """
                     }
