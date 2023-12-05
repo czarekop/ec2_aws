@@ -28,7 +28,6 @@ pipeline {
                      // Dodaj ścieżkę do Terraforma do PATH
                     def terraformHome = tool name: 'terraform', type: 'org.jenkinsci.plugins.terraform.TerraformInstallation'
                     env.PATH = "${terraformHome}/bin:${env.PATH}"
-                    sh "which terraform"
                     sh """
                         terraform init ${env.WORKSPACE}/ec2_aws
                         terraform plan -out tfplan ${env.WORKSPACE}/ec2_aws
