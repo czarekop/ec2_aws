@@ -6,8 +6,6 @@ pipeline {
     environment {
         TERRAFORM_HOME = tool name: 'terraform-11', type: 'org.jenkinsci.plugins.terraform.TerraformInstallation'
         PATH = "${TERRAFORM_HOME}/bin:${env.PATH}"
-    }
-    environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION = 'us-east-1'
@@ -28,9 +26,9 @@ pipeline {
 
         stage('Plan') {
             steps {
-                sh 'pwd;cd TERRAFORM_HOME ; Terraform init'
-                sh "pwd;cd TERRAFORM_HOME ; Terraform plan -out tfplan"
-                sh 'pwd;cd TERRAFORM_HOME ; Terraform show -no-color tfplan > tfplan.txt'
+                sh 'pwd;cd TERRAFORM_HOME ; terraform init'
+                sh "pwd;cd TERRAFORM_HOME ; terraform plan -out tfplan"
+                sh 'pwd;cd TERRAFORM_HOME ; terraform show -no-color tfplan > tfplan.txt'
             }
         }
         stage('Approval') {
