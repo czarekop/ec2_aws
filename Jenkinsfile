@@ -58,12 +58,12 @@ pipeline {
         stage('Apply') {
             steps {
                 script {
+                    echo "Current directory: ${env.WORKSPACE}/ec2_aws"
                     // Change working directory and run terraform apply
                     dir("${env.WORKSPACE}/ec2_aws") {
-                    sh "terraform apply -input=false tfplan"
+                        echo "Running terraform apply command"
+                        sh "terraform apply -input=false tfplan"
                     }
                 }
             }
         }
-
-  }
