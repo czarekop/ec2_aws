@@ -10,7 +10,7 @@ resource "aws_instance" "ec2" {
   ami           = "ami-0669b163befffbdfc"
   instance_type = "t2.micro"
   tags = {
-    name = var.ec2_Instance_Name
+    ec2_Instance_name = var.ec2_Instance_Name
   }
   key_name = "czarek_aws"
   
