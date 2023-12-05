@@ -4,7 +4,6 @@ provider "aws" {
 
 variable "ec2_instance_name" {
   type    = string
-  default = "default_instance_name"
 }
 
 resource "aws_instance" "ec2" {

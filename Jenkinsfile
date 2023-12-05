@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'ec2InstanceName', defaultValue: '', description: 'wprowadz nazwe maszyny ec2')
+        string(name: 'ec2_instance_name', defaultValue: '', description: 'wprowadz nazwe maszyny ec2')
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'od razu po planie wykonaj terraform apply?')
     }
 
