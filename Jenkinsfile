@@ -1,15 +1,16 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'ec2InstanceName', defaultValue: '', description: 'Enter the name for the EC2 instance')
+        booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
+    }
+
     environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        AWS_DEFAULT_REGION    = 'eu-central-1'
+        AWS_DEFAULT_REGION    = 'us-east-1'
         TERRAFORM_HOME        = tool 'terraform'
-    }
-
-    parameters {
-        booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
     }
 
     stages {
@@ -32,7 +33,7 @@ pipeline {
                     dir("${env.WORKSPACE}/ec2_aws") {
                         sh """
                             terraform init
-                            terraform plan -out tfplan
+                            terraform plan -out tfplan -var 'ec2_instance_name=${params.ec2InstanceName}'
                             terraform show -no-color tfplan > tfplan.txt
                         """
                     }
