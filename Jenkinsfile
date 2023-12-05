@@ -24,9 +24,9 @@ pipeline {
 
         stage('Plan') {
             steps {
-                sh 'pwd;cd /usr/bin/terraform/ ; terraform init'
-                sh "pwd;cd /usr/bin/terraform/ ; terraform plan -out tfplan"
-                sh 'pwd;cd /usr/bin/terraform/ ; terraform show -no-color tfplan > tfplan.txt'
+                sh 'pwd;cd /var/jenkins_home/workspace/awsec2 ; terraform init'
+                sh "pwd;cd /var/jenkins_home/workspace/awsec2 ; terraform plan -out tfplan"
+                sh 'pwd;cd /var/jenkins_home/workspace/awsec2 ; terraform show -no-color tfplan > tfplan.txt'
             }
         }
         stage('Approval') {
