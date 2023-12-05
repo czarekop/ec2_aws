@@ -22,20 +22,23 @@ pipeline {
                 }
             }
 
-        stage('Plan') {
-            steps {
-                script {
-                     // Dodaj ścieżkę do Terraforma do PATH
-                    def terraformHome = tool name: 'terraform', type: 'org.jenkinsci.plugins.terraform.TerraformInstallation'
-                    env.PATH = "${terraformHome}/bin:${env.PATH}"
-                    sh """
-                        terraform init ${env.WORKSPACE}/ec2_aws
-                        terraform plan -out tfplan ${env.WORKSPACE}/ec2_aws
-                        terraform show -no-color tfplan > ${env.WORKSPACE}/ec2_aws/tfplan.txt
-                    """
-                }
-            }
+       stage('Plan') {
+          steps {
+              script {
+                  // Add Terraform to the PATH
+                  def terraformHome = tool name: 'terraform', type: 'org.jenkinsci.plugins.terraform.TerraformInstallation'
+                  env.PATH = "${terraformHome}/bin:${env.PATH}"
+                  // Change working directory and run terraform commands
+                 dir("${env.WORKSPACE}/ec2_aws") {
+                     sh """
+                         terraform init
+                         terraform plan -out tfplan
+                         terraform show -no-color tfplan > tfplan.txt
+                     """
+                 }
+              }
         }
+}
         stage('Approval') {
            when {
                not {
