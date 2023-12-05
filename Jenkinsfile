@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'ec2InstanceName', defaultValue: '', description: 'Enter the name for the EC2 instance')
-        booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
+        string(name: 'ec2InstanceName', defaultValue: '', description: 'wprowadz nazwe maszyny ec2')
+        booleanParam(name: 'autoApprove', defaultValue: false, description: 'od razu po planie wykonaj terraform apply?')
     }
 
     environment {
