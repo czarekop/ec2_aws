@@ -26,10 +26,13 @@ pipeline {
 
         stage('Plan') {
             steps {
-                export PATH=\${TERRAFORM_HOME}/bin:\${PATH}
-                sh "terraform init ${env.WORKSPACE}/ec2_aws"
-                sh "terraform plan -out tfplan ${env.WORKSPACE}/ec2_aws"
-                sh "terraform show -no-color tfplan > ${env.WORKSPACE}/ec2_aws/tfplan.txt"
+                script {
+                    sh """
+                        export PATH=\${TERRAFORM_HOME}/bin:\${PATH}
+                        terraform init ${env.WORKSPACE}/ec2_aws
+                        terraform plan -out tfplan ${env.WORKSPACE}/ec2_aws
+                        terraform show -no-color tfplan > ${env.WORKSPACE}/ec2_aws/tfplan.txt
+                    """
             }
         }
         stage('Approval') {
