@@ -2,6 +2,11 @@ provider "aws" {
   region = "eu-central-1"
 }
 
+variable "ec2_instance_name" {
+  type    = string
+  default = "default_instance_name"
+}
+
 resource "aws_instance" "ec2" {
   ami           = "ami-0669b163befffbdfc"
   instance_type = "t2.micro"
