@@ -33,6 +33,7 @@ pipeline {
                         terraform plan -out tfplan ${env.WORKSPACE}/ec2_aws
                         terraform show -no-color tfplan > ${env.WORKSPACE}/ec2_aws/tfplan.txt
                     """
+                }
             }
         }
         stage('Approval') {
